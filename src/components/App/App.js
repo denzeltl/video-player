@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Video from '../Video/Video';
 import Menu from '../Menu/Menu';
 
@@ -10,23 +10,20 @@ const VIDEOS = {
 };
 
 function App() {
-    const 
+    const [state, setState] = useState({ src: VIDEOS.fast });
+
+    const chooseVideo = (text) => {
+        let newVideo = VIDEOS[text];
+        setState({ src: newVideo });
+    };
 
     return (
         <div>
             <h1>Video Player</h1>
-            <Menu />
-            <Video />
+            <Menu chooseVideo={chooseVideo} />
+            <Video src={state.src} />
         </div>
     );
-}
-
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = { src: VIDEOS.fast };
-    }
 }
 
 export default App;
